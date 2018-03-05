@@ -46,8 +46,6 @@
                                         </div>
                                     </div>
 
-                                    <!--<input type="hidden" name="_csrf" v-model="csrfToken" value="{{ csrfToken }}">-->
-
                                     <div class="form-group row">
                                         <div class="col-sm-8 offset-sm-0 offset-md-3">
                                             <button type="submit" class="btn btn-primary">SignIn</button>
@@ -82,8 +80,7 @@
             return {
                 email: null,
                 password: null,
-                error: null,
-                csrfToken: null
+                error: null
             }
         },
 

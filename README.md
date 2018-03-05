@@ -17,7 +17,7 @@ https://github.com/ste7/mevn-boilerplate.git
 ### Serve
 To serve the backend
 ```sh
-cd boilerplate/app
+cd mevn-boilerplate/app
 npm start
 ``` 
 To serve the frontend

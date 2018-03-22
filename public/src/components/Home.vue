@@ -1,19 +1,14 @@
 <template>
-    <div class="home_container">
+    <div class="home_container container">
+
+        <p>Home</p>
 
     </div>
 </template>
 
 <script>
-    import { userExists } from '../app/auth'
 
     export default {
-        name: 'Home',
-
-        created() {
-            if (! userExists()) {
-                window.location.replace('#/signin');
-            }
-        }
+        name: 'Home'
     }
 </script>

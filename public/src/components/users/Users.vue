@@ -1,5 +1,5 @@
 <template>
-    <div class="users_container">
+    <div class="users_container container">
         <h2 class="title">Users</h2>
 
         <user v-for="user in users" v-bind:key="user._id" v-bind:name="user.name" v-bind:email="user.email"></user>
@@ -10,33 +10,27 @@
 
 <script>
     import user from '@/components/users/User'
-
-    import { getUsers } from '../../app/actions'
-    import { userExists } from '../../app/auth'
+    import { mapActions, mapGetters } from 'vuex'
 
     export default {
         name: 'Users',
 
-        components: {
-            user
+        components: { user },
+
+        methods: {
+            ...mapActions({
+                getUsers: 'getUsers'
+            })
         },
 
-        data() {
-            return {
-                users: null
-            }
+        mounted() {
+            this.getUsers();
         },
 
-        mounted () {
-            getUsers().then((response) => {
-                this.users = response.data;
-            });
-        },
-
-        created() {
-            if (! userExists()) {
-                window.location.replace('#/');
-            }
+        computed: {
+            ...mapGetters({
+                users: 'getUsers'
+            })
         }
     }
 </script>

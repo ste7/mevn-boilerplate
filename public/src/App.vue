@@ -1,9 +1,8 @@
 <template>
-  <div id="app">
-      <navbar></navbar>
-    <!--<img src="./assets/logo.png">-->
-    <router-view/>
-  </div>
+    <div id="app">
+        <navbar></navbar>
+        <router-view/>
+    </div>
 </template>
 
 <script>
@@ -38,10 +37,10 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
+    #app {
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #2c3e50;
+    }
 </style>

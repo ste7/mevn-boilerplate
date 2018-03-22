@@ -9,27 +9,43 @@ import NotFound from '@/components/NotFound'
 
 Vue.use(Router);
 
-export default new Router({
+
+import * as beforeEnter from './beforeEnter'
+
+
+const router = new Router({
     routes: [
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+            beforeEnter: (to, from, next) => {
+                beforeEnter.authenticate(to, from, next)
+            }
         },
         {
             path: '/signup',
             name: 'signup',
-            component: Signup
+            component: Signup,
+            beforeEnter: (to, from, next) => {
+                beforeEnter.isAuthenticated(to, from, next)
+            }
         },
         {
             path: '/signin',
             name: 'signin',
-            component: Signin
+            component: Signin,
+            beforeEnter: (to, from, next) => {
+                beforeEnter.isAuthenticated(to, from, next)
+            }
         },
         {
             path: '/users',
             name: 'users',
-            component: Users
+            component: Users,
+            beforeEnter: (to, from, next) => {
+                beforeEnter.authenticate(to, from, next)
+            }
         },
         {
             path: '*',
@@ -38,3 +54,7 @@ export default new Router({
         }
     ]
 })
+
+
+
+export default router

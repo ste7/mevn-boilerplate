@@ -1,6 +1,5 @@
 <template>
     <div class="navbar_container">
-
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <a class="navbar-brand" href="#/">MEVNstack</a>
 
@@ -9,6 +8,7 @@
                     <a class="nav-link" href="#/users">Users</a>
                 </li>
             </ul>
+
 
 
             <ul class="nav-item dropdown navbar-nav ml-auto">
@@ -20,12 +20,12 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="nav-item dropdown navbar-nav ml-auto">
 
-                        <div v-if="signedIn === true">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" v-model="user">
-                                {{ user.email }}
+                        <div v-if="user.authenticated">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                {{ user.data.email }}
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" v-on:click="signOut">SignOut</a>
+                                <a class="dropdown-item" href="#" v-on:click="out">SignOut</a>
                             </div>
                         </div>
 
@@ -49,38 +49,25 @@
 
 
 <script>
-    import { signOut } from '../../app/actions'
-    import { userExists, getUser } from '../../app/auth'
-    import { bus } from '../../bus'
-
+    import { mapActions, mapGetters } from 'vuex'
 
     export default {
         name: 'Navbar',
 
-        data() {
-            return {
-                user: null,
-                signedIn: false
-            }
-        },
-
-        mounted () {
-            this.signedIn = userExists();
-            this.user = getUser();
-        },
-
-        created () {
-            bus.$on('sign-in', val => {
-                this.signedIn = val.signedIn;
-                this.user = val;
-            });
+        computed: {
+            ...mapGetters({
+                user: 'getUser'
+            })
         },
 
         methods: {
-            signOut() {
-                signOut();
+            ...mapActions({
+                signOut: 'signOut'
+            }),
+            out() {
+                this.signOut();
                 this.$nextTick(function () {
-                    this.signedIn = false;
+                    window.location.replace('#/signin');
                 })
             }
         }

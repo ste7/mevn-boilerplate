@@ -66,10 +66,8 @@
 
 
 <script>
-    import { signIn } from '../../app/actions'
-    import { userExists } from '../../app/auth'
-    import { bus } from '../../bus'
     import Warning from "../templates/Warning.vue";
+    import { mapActions } from 'vuex'
 
 
     export default {
@@ -85,10 +83,14 @@
         },
 
         methods: {
+            ...mapActions({
+                signIn: 'signIn'
+            }),
             submit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                        signIn({
+
+                        this.signIn({
                             email: this.email,
                             password: this.password,
                         }).catch((err) => {
@@ -98,12 +100,6 @@
                         return true;
                     }
                 });
-            }
-        },
-
-        created() {
-            if (userExists()) {
-                window.location.replace('#/');
             }
         }
     }

@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VeeValidate from 'vee-validate'
+import store from './store'
 
 Vue.config.productionTip = false;
 
@@ -19,6 +20,7 @@ VeeValidate.Validator.extend('unique', unique);
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
+    store,
     router,
     components: { App },
     template: '<App/>'

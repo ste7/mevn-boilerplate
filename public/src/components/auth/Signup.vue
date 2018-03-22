@@ -82,10 +82,7 @@
 
 
 <script>
-    import { signUp } from '../../app/actions';
-    import { userExists } from '../../app/auth';
-    import { bus } from '../../bus'
-
+    import { mapActions } from 'vuex'
 
     export default {
         name: 'Signup',
@@ -101,29 +98,21 @@
         },
 
         methods: {
+            ...mapActions({
+                signUp: 'signUp'
+            }),
             create() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                        signUp({
+                        this.signUp({
                             name: this.name,
                             email: this.email,
                             password: this.password
                         });
 
-                        bus.$emit('sign-in', {
-                            signedIn: true,
-                            email: this.email
-                        });
-
                         return true;
                     }
                 });
-            }
-        },
-
-        created() {
-            if (userExists()) {
-                window.location.replace('#/');
             }
         }
     }

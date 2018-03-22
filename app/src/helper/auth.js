@@ -24,11 +24,8 @@ exports.verify = function (req, res, next) {
 
         jwt.verify(token, secret, function(err, decoded) {
             if (decoded) {
-                console.log(decoded);
-
                 next();
-            }
-            else {
+            } else {
                 res.sendStatus(403);
             }
         });

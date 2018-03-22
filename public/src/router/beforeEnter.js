@@ -14,7 +14,6 @@ export const authenticate = (to, from, next) => {
                 next('signin');
             }
         }).catch(() => {
-            //context.errors = 'lala';
             next('signin');
         });
     }

@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const secret = 'shhhhh';
-const expire = { expiresIn: '2 days' };
+const expire = { exp: Math.floor(Date.now() / 1000) + (60 * 60) };
+// const expire = { expiresIn: '2 days' };
 
 
 
 exports.encode = function (payload) {
-    let token = jwt.sign(payload, secret, expire);
+    let token = jwt.sign({expire, payload}, secret);
+    // let token = jwt.sign(payload, secret, expire);
 
     return token;
 };
